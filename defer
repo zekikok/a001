@@ -17,10 +17,6 @@ hello
 world
 -----------------------------------------------------------------------------------
 
-https://github.com/Furkan-Gulsen/turkce-go-egitimi/blob/main/defer/Readme.md
-
-Defer
-
 defer, Go dilindeki özel bir anahtar sözcüktür ve belirli bir işlevin çalışmasının sonunda çalıştırılacak işlevleri veya ifadeleri belirtmek için kullanılır. 
 Defer ifadeleri, işlevin sonunda ne olursa olsun, yani o fonksiyonun herhangi bir nedenle sona ermesi durumunda bile çalıştırılacaktır.
 Defer ifadeleri kullanarak, bir işlevin sonunda açılan dosyaları, kapatılmayan veritabanı bağlantılarını, ağ bağlantılarını vb. hızlı ve güvenli bir şekilde kapatmak mümkündür.
@@ -60,5 +56,6 @@ Daha sonra, Read fonksiyonu kullanılarak dosya içeriği okunur ve ekrana yazd�
 
 Burada dikkat edilmesi gereken önemli bir nokta, defer ifadesinin en sona yazılmamasıdır. 
 defer ifadesinin kapatılacak olan dosyayı açan ifade ile aynı blokta olması gerekmektedir. Aksi takdirde, defer ifadesi, işlevin sonuna kadar beklemeye devam edecektir.
+
 
 
