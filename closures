@@ -1,8 +1,6 @@
 
-https://go.dev/tour/moretypes/25
-
-Function closures 
-
+Function closures     ( https://go.dev/tour/moretypes/25 )
+------------------ 
 Go functions may be closures. A closure is a function value that references variables from outside its body. 
 The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
 For example, the adder function returns a closure. Each closure is bound to its own sum variable.
@@ -32,7 +30,7 @@ func main() {
 3 -6
 6 -12
  
----------------
+--------------------------------------------
 package main
 import "fmt"
 
@@ -45,10 +43,10 @@ func outer() func() int {
 }
 
 func main() {
-	increment := outer()
-  fmt.Println(increment())
-  fmt.Println(increment())
-  fmt.Println(increment())
+  increment := outer()
+	  fmt.Println(increment())
+	  fmt.Println(increment())
+	  fmt.Println(increment())
 }
 // Çıktı  1   2  3
 
