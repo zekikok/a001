@@ -41,6 +41,17 @@ func main() {
 	fmt.Printf("c :  %p %v \n", &c[0], c)
 	fmt.Printf("d :  %p %v \n", &d[0], d)
 
+   fmt.Println()
+   fmt.Println("=======** copy **  ==============")
+
+s := []string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
+x := make([]string, len(s))
+	fmt.Printf("s :  %p %v \n", &s[0], s)
+	fmt.Printf("x :  %p %v \n", &x[0], x)
+  copy(x, s)
+	fmt.Printf("s :  %p %v \n", &s[0], s)
+	fmt.Printf("x :  %p %v \n", &x[0], x)
+
 }
 
 /* çıktı
@@ -59,12 +70,17 @@ b :  0xc0000180f0 [10 11 12 13 33 0 0 0 0 0]
 c :  0xc000018050 [99 11 12 13 33 0 0 0 0 0] 
 d :  0xc000018050 [99 11 12 13 33] 
 
+=======** copy **  ==============
+s :  0xc0000b6000 [Sunday Monday Tuesday Wednesday Thursday Friday Saturday] 
+x :  0xc0000b6070 [      ] 
+s :  0xc0000b6000 [Sunday Monday Tuesday Wednesday Thursday Friday Saturday] 
+x :  0xc0000b6070 [Sunday Monday Tuesday Wednesday Thursday Friday Saturday] 
 
 -------------------------------------------
    İNCELE
 https://go.dev/blog/slices-intro
 --------------------------------------------
-
+*/
 
 
 
