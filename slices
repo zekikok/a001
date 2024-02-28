@@ -394,8 +394,10 @@ index 3 :  i  105
 --------------------------------------------------------------------------------------
 
 package main
+
 import (
 	"fmt"
+	"unsafe"
 )
 
 func main() {
@@ -418,7 +420,7 @@ func main() {
 
 	fmt.Println("--------------------------------------------------------------")
 	fmt.Println("YUKARIDAKİ ÇIKTIYI İNCELERSEK ; En uzun eleman  ahmet  5 karakter olamasına ragmen adresler 16 byte artmış. Yani her bir eleman için 16 byte harcamış ")
-	fmt.Println("demek ki default bir kapasite değeri olarak 16 atamış.   4*16 = 64 byte harcamış.   ")
+	fmt.Println("Toplam :  4*16 = 64 byte     ")
 	fmt.Println()
 	fmt.Println("  Bir elamanın uzunlugunu artıralım  16  yapalım.")
 
@@ -433,9 +435,9 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("  Bir elamanın uzunlugunu artıralım 16 dan büyük yapalım. 23 olsun")
+	fmt.Println("  Bir elamanın uzunlugunu artıralım 16 dan büyük yapalım.   olsun")
 
-	var c [4]string = [4]string{"ali", "zekikok12zekikok1234567", "ahmet", "su"}
+	var c [4]string = [4]string{"ali", "zekikok12zekikok1234567fffffffffffffffffffffffffffassdsdddddddddddddddd", "ahmet", "su"}
 
 	fmt.Println("--------------------------------------------------------------")
 	fmt.Println("index    adresi         degeri                    uzunlugu")
@@ -445,10 +447,17 @@ func main() {
 
 	}
 
-		fmt.Println("--------------------------------------------------------------")
+	fmt.Println("--------------------------------------------------------------")
 	cx := c[1]
-	fmt.Printf("%T %p    %-20s    %5d   \n", cx, &cx, cx, len(cx))
+	fmt.Printf("c[1]  türü, adresi, degeri, uzunlugu : %T %p    %-20s    %5d   \n", cx, &cx, cx, len(cx))
+	fmt.Println("--------------------------------------------------------------")
+
+	fmt.Printf("a     : %d byte \n", unsafe.Sizeof(a))
+	fmt.Printf("c     : %d byte \n", unsafe.Sizeof(c))
+	fmt.Printf("c[1]  : %d byte \n", unsafe.Sizeof(c[1]))
+	fmt.Printf("*(&c[1])  : %v \n", *(&c[1]))
 }
+
 // CIKTI
 --------------------------------------------------------------
 index    adresi         degeri                    uzunlugu
@@ -459,7 +468,7 @@ index    adresi         degeri                    uzunlugu
     3   0xc0000240b0    su                          2 
 --------------------------------------------------------------
 YUKARIDAKİ ÇIKTIYI İNCELERSEK ; En uzun eleman  ahmet  5 karakter olamasına ragmen adresler 16 byte artmış. Yani her bir eleman için 16 byte harcamış 
-demek ki default bir kapasite değeri olarak 16 atamış.   4*16 = 64 byte harcamış.   
+Toplam :  4*16 = 64 byte     
 
   Bir elamanın uzunlugunu artıralım  16  yapalım.
 --------------------------------------------------------------
@@ -470,21 +479,28 @@ index    adresi         degeri                    uzunlugu
     2   0xc0000240e0    ahmet                       5 
     3   0xc0000240f0    su                          2 
 
-  Bir elamanın uzunlugunu artıralım 16 dan büyük yapalım. 23 olsun
+  Bir elamanın uzunlugunu artıralım 16 dan büyük yapalım.   olsun
 --------------------------------------------------------------
 index    adresi         degeri                    uzunlugu
 --------------------------------------------------------------
     0   0xc000024100    ali                         3 
-    1   0xc000024110    zekikok12zekikok1234567       23 
+    1   0xc000024110    zekikok12zekikok1234567fffffffffffffffffffffffffffassdsdddddddddddddddd       71 
     2   0xc000024120    ahmet                       5 
     3   0xc000024130    su                          2 
 --------------------------------------------------------------
-string 0xc000014130    zekikok12zekikok1234567       23   
+c[1]  türü, adresi, degeri, uzunlugu : string 0xc000014130    zekikok12zekikok1234567fffffffffffffffffffffffffffassdsdddddddddddddddd       71   
+--------------------------------------------------------------
+a     : 64 byte 
+c     : 64 byte 
+c[1]  : 16 byte 
+*(&c[1])  : zekikok12zekikok1234567fffffffffffffffffffffffffffassdsdddddddddddddddd 
+
 
 */
 
-
-
+--------------------------------------
+  İNCELE    https://go.dev/blog/slices
+--------------------------------------
 
 
 
