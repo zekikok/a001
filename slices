@@ -456,6 +456,15 @@ func main() {
 	fmt.Printf("c     : %d byte \n", unsafe.Sizeof(c))
 	fmt.Printf("c[1]  : %d byte \n", unsafe.Sizeof(c[1]))
 	fmt.Printf("*(&c[1])  : %v \n", *(&c[1]))
+
+/*
+    Actually, there is a 16 byte difference (since the addresses are in hex), which would correspond to the slice layout described in here, that is:
+    Data pointer (8 bytes)
+    Length (int, 4 bytes)
+    Capacity (int, 4 bytes)
+*/
+
+
 }
 
 // CIKTI
