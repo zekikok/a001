@@ -500,9 +500,84 @@ c[1]  : 16 byte
 
 --------------------------------------
   İNCELE    https://go.dev/blog/slices
+
+  Bu blog dan alıntılar  bu konuya devam edilecek........
 --------------------------------------
 
+package main
+
+import (
+	"fmt"
+)
+
+func AddOneToEachElement(slice []byte) {
+	for i := range slice {
+		slice[i]++
+	}
+}
+
+func SubtractOneFromLength(slice []byte) []byte {
+	slice = slice[0 : len(slice)-1]
+	return slice
+
+	/*
+	   Here we see that the contents of a slice argument can be modified by a function, but its header cannot.
+
+	   	The length stored in the slice variable is not modified by the call to the function,
+	   	since the function is passed a copy of the slice header, not the original.
+	   	Thus if we want to write a function that modifies the header, we must return it as a result parameter,
+	   	just as we have done here. The slice variable is unchanged but the returned value has the new length, which is then stored in newSlice,
+	*/
+}
+
+func PtrSubtractOneFromLength(slicePtr *[]byte) {
+	slice := *slicePtr
+	*slicePtr = slice[0 : len(slice)-1]
+}
+
+func main() {
+	var buffer [256]byte
+
+	for i := 0; i < 256; i++ {
+		buffer[i] = byte(i)
+	}
+		fmt.Println(buffer)
+		fmt.Println("--------------------------------------------------------------")
+
+	slice := buffer[10:20]
+
+		fmt.Println("before", slice)
+	AddOneToEachElement(slice)
+		fmt.Println("after", slice)
+		fmt.Println("--------------------------------------------------------------")
+
+		fmt.Println("Before: len(slice) =", len(slice))
+	newSlice := SubtractOneFromLength(slice)
+		fmt.Println("After:  len(slice) =", len(slice))
+		fmt.Println("After:  len(newSlice) =", len(newSlice))
+
+		fmt.Println("--------------------------------------------------------------")
+		fmt.Println("----- Pointers to slices: Method receivers -----------")
+		fmt.Println("Before: len(slice) =", len(slice))
+	PtrSubtractOneFromLength(&slice)
+		fmt.Println("After:  len(slice) =", len(slice))
+
+}
+
+/*  output 
+[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 .... 255]
+--------------------------------------------------------------
+before [10 11 12 13 14 15 16 17 18 19]
+after [11 12 13 14 15 16 17 18 19 20]
+--------------------------------------------------------------
+Before: len(slice) = 10
+After:  len(slice) = 10
+After:  len(newSlice) = 9
+--------------------------------------------------------------
+----- Pointers to slices: Method receivers -----------
+Before: len(slice) = 10
 
 
+*/
 
 
