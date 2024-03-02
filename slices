@@ -1,137 +1,51 @@
  
-/*   ARRAYS
-/*
+/*   ARRAYS  - SLICES
 ------------------------------------------------------------------------------------------------------------------------
-
 	Diziye ilk değer verilirken dizi [] içerisi boş bırakılabilir ya da ... (ellipsis) atomu yazılabilir. 
            Aslında []   içerisinin boş bırakılması aslında bir slice yaratmak anlamındadır
-
 ------------------------------------------------------------------------------------------------------------------------
 */
-
-package main
-import (
-	"fmt"
-)
-
-func main() {
-	a := [...]int{1, 2, 3, 4, 5}
-	s := []string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
-
-	for _, val := range a {
-		fmt.Printf("%02d ", val)
-	}
-	fmt.Println()
-	for _, dow := range s {
-		fmt.Printf("%s\n", dow)
-	}
-}
-
-/*
-------------------------------------------------------------------------------------------------------------------------
+/*------------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki örneği inceleyiniz. Örnekte slice'ın kopyalanmadığına adresin kopyalandığına dikkat ediniz
 ------------------------------------------------------------------------------------------------------------------------
 */
 
 package main
-
 import (
 	"fmt"
 )
-
 func main() {
 	a := []int{1, 2, 3, 4, 5}
 	b := a
-
 	for _, val := range a {
 		fmt.Printf("%02d ", val)
 	}
-
-	fmt.Println()
-
+		fmt.Println()
 	for _, val := range b {
 		fmt.Printf("%02d ", val)
 	}
-
-	fmt.Println()
-
+		fmt.Println()
 	for i, _ := range a {
 		a[i] *= 2
 	}
-
 	for _, val := range a {
 		fmt.Printf("%02d ", val)
 	}
-
-	fmt.Println()
-
+		fmt.Println()
 	for _, val := range b {
 		fmt.Printf("%02d ", val)
 	}
-
 	fmt.Println()
 }
 
 /*
 ------------------------------------------------------------------------------------------------------------------------
-
-	Aşağıdaki örneği inceleyiniz. Örnekte slice'ın kopyalanmadığına adresin kopyalandığına dikkat ediniz
-
+	copy  method .  Aşağıdaki örneği inceleyiniz
 ------------------------------------------------------------------------------------------------------------------------
 */
 
 package main
-
-import (
-	"fmt"
-	"strings"
-)
-
-func main() {
-	s := []string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
-	upper := s
-
-	for _, dow := range s {
-		fmt.Printf("%s ", dow)
-	}
-
-	fmt.Println()
-
-	for _, val := range upper {
-		fmt.Printf("%s ", val)
-	}
-
-	fmt.Println()
-
-	for i, dow := range upper {
-		s[i] = strings.ToUpper(dow)
-	}
-
-	for _, dow := range s {
-		fmt.Printf("%s ", dow)
-	}
-
-	fmt.Println()
-
-	for _, dow := range upper {
-		fmt.Printf("%s ", dow)
-	}
-
-	fmt.Println()
-}
-
-
-/*
-------------------------------------------------------------------------------------------------------------------------
-
-	Aşağıdaki örneği inceleyiniz
-
-------------------------------------------------------------------------------------------------------------------------
-*/
-
-package main
-
-import (
+<<import (
 	"fmt"
 	"strings"
 )
@@ -145,13 +59,10 @@ func main() {
 	for _, dow := range s {
 		fmt.Printf("%s ", dow)
 	}
-
 	fmt.Println()
-
 	for _, val := range upper {
 		fmt.Printf("%s ", val)
 	}
-
 	fmt.Println()
 
 	for i, dow := range upper {
@@ -173,9 +84,7 @@ func main() {
 
 /*
 ------------------------------------------------------------------------------------------------------------------------
-
 	Aslında diziler atama durumunda doğrudan kopyalanır
-
 ------------------------------------------------------------------------------------------------------------------------
 */
 
@@ -221,7 +130,6 @@ func main() {
 
 
 ------------------------------------------------------------------------------------------------------------------------
-
 	Bir dizi fonksiyona geçirilirken doğrudan geçirildiğinde aslında kopyalama işlemi yapılır. Bu da dizinin uzunluğuna
 	göre maliyetli olabilmektedir. Bu durumda çok büyük diziler için fonksiyona doğrudan geçirmek yerine pointer ile
 	geçirmek veya dizi yerine slice kullanmak daha doğru bir yaklaşımdır. Aşağıdaki örnekte 7 elemalı bir dizi stdout'a
@@ -329,7 +237,7 @@ x := make([]string, len(s))
 
 }
 
-/* çıktı
+/* OUTPUT
 a : [0 0 0 0 0 0 0 0 0 0]
 a :  0xc000018050 [10 11 12 13 14 0 0 0 0 0] 
 b :  0xc0000180f0 [0 0 0 0 0 0 0 0 0 0] 
@@ -383,7 +291,7 @@ func main() {
 	*/
 
 }
-/* ÇIKTI
+/* OUTPUT
 index 0 :  Z  90
 index 1 :  e  101
 index 2 :  k  107
@@ -422,6 +330,7 @@ func main() {
 	fmt.Println("YUKARIDAKİ ÇIKTIYI İNCELERSEK ; En uzun eleman  ahmet  5 karakter olamasına ragmen adresler 16 byte artmış. Yani her bir eleman için 16 byte harcamış ")
 	fmt.Println("Toplam :  4*16 = 64 byte     ")
 	fmt.Println()
+
 	fmt.Println("  Bir elamanın uzunlugunu artıralım  16  yapalım.")
 
 	var b [4]string = [4]string{"ali", "zekikok12zekikok", "ahmet", "su"}
@@ -458,16 +367,17 @@ func main() {
 	fmt.Printf("*(&c[1])  : %v \n", *(&c[1]))
 
 /*
+---------------------------------------------------
     Actually, there is a 16 byte difference (since the addresses are in hex), which would correspond to the slice layout described in here, that is:
-    Data pointer (8 bytes)
-    Length (int, 4 bytes)
-    Capacity (int, 4 bytes)
+	    Data pointer (8 bytes)
+	    Length (int, 4 bytes)
+	    Capacity (int, 4 bytes)
+---------------------------------------------------
 */
-
 
 }
 
-// CIKTI
+// OUTPUT
 --------------------------------------------------------------
 index    adresi         degeri                    uzunlugu
 --------------------------------------------------------------
@@ -558,8 +468,8 @@ func main() {
 		fmt.Println("before", slice)
 	AddOneToEachElement(slice)
 		fmt.Println("after", slice)
+	
 		fmt.Println("--------------------------------------------------------------")
-
 		fmt.Println("Before: len(slice) =", len(slice))
 	newSlice := SubtractOneFromLength(slice)
 		fmt.Println("After:  len(slice) =", len(slice))
@@ -588,6 +498,37 @@ Before: len(slice) = 10
 
 
 */
+
+/*-------------------------------------------------
+	Let’s say we wanted to have a method on a slice that truncates it at the final slash. We could write it like this:
+---------------------------------------------------
+*/
+
+type path []byte
+
+func (p *path) TruncateAtFinalSlash() {
+    i := bytes.LastIndex(*p, []byte("/"))
+    if i >= 0 {
+        *p = (*p)[0:i]
+    }
+}
+
+func main() {
+    pathName := path("/usr/bin/tso") //     ************** Conversion from string to path.  ************
+    pathName.TruncateAtFinalSlash()
+    fmt.Printf("%s\n", pathName)
+}
+
+/*
+------------------------ kalan konular -----
+Capacity
+Make
+Copy
+Append
+Append Built in
+------------------------
+*/
+
 
 YUKARIYA DEVAM EDECEĞİM.
 
